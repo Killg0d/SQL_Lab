@@ -1,0 +1,85 @@
+SQL> ALTER TABLE PROJ
+  2  ADD CONSTRAINT PK_DNO_PRJNO PRIMARY KEY(DNO,PRJ_NO);
+
+Table altered.
+
+SQL> ALTER TABLE EMP
+  2  ADD COLUMN PRJ_ID VARCHAR2(8);
+ADD COLUMN PRJ_ID VARCHAR2(8)
+    *
+ERROR at line 2:
+ORA-00904: : invalid identifier 
+
+
+SQL> SPOOL "D:\oraclePrg\230970005\lab\week1\LAB1_SPOOL.txt" APPEND;
+SQL> SPOOL D:\oraclePrg\230970005\lab\week1\LAB1_SPOOL.txt APPEND;
+SQL> 
+SQL> ALTER TABLE EMP
+  2  ADD PRJ_ID VARCHAR2(8);
+
+Table altered.
+
+SQL> ALTER TABLE EMP
+  2    2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY (DEPTNO, PRJ_ID) REFERENCES PROJ (DNO, PRJ_NO);
+  2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY (DEPTNO, PRJ_ID) REFERENCES PROJ (DNO, PRJ_NO)
+  *
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(8)
+
+SQL> DESC PROJ;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                    NOT NULL VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+
+SQL> ALTER TABLE EMP
+  2    2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY(DEPTNO, PRJ_ID) REFERENCES PROJ(DNO, PRJ_NO);
+  2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY(DEPTNO, PRJ_ID) REFERENCES PROJ(DNO, PRJ_NO)
+  *
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE EMP
+  2    2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY(DEPTNO, PRJ_ID) REFERENCES PROJ(DNO, PRJ_NO);
+  2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY(DEPTNO, PRJ_ID) REFERENCES PROJ(DNO, PRJ_NO)
+  *
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE EMP
+  2  ADD CONSTRAINT EMP_PRJ_FK FOREIGN KEY(DEPTNO, PRJ_ID) REFERENCES PROJ(DNO, PRJ_NO);
+
+Table altered.
+
+SQL> ALTER TABLE EMP
+  2  ADD CONSTRAINT VALID_EMPNO_Cons CHECK(EMPNO>100);
+
+Table altered.
+
+SQL> ALTER TABLE PROJ ADD PRJ_FUND NUMBER(7);
+
+Table altered.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\week1\LAB1_SPOOL.txt APPEND;
+SQL> SPOOL OFF;

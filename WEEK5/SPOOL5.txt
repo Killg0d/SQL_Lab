@@ -1,0 +1,722 @@
+SQL> SELECT MIN(SAL) AS MIN_SAL,MAX(SAL) AS MAX_SAL, AVG(SAL) AS AVG_SAL,SUM AS TOTAL_SAL FROM EMP;
+SELECT MIN(SAL) AS MIN_SAL,MAX(SAL) AS MAX_SAL, AVG(SAL) AS AVG_SAL,SUM AS TOTAL_SAL FROM EMP
+                                                                    *
+ERROR at line 1:
+ORA-00904: "SUM": invalid identifier 
+
+
+SQL> SPOOL OFF;
+SQL> SELECT MIN(SAL) AS MIN_SAL,MAX(SAL) AS MAX_SAL, AVG(SAL) AS AVG_SAL,SUM(SAL) AS TOTAL_SAL FROM EMP;
+
+   MIN_SAL    MAX_SAL    AVG_SAL  TOTAL_SAL                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+     23000      65000 39272.7273     432000                                                                                                                                                             
+
+SQL> SPOOL OFF;
+SQL> 
+SQL> SELECT PNAME FROM PROJ, DEPT WHERE DNAME='MARKETING' AND PROJ.DNO=DEPT.DNO;
+SELECT PNAME FROM PROJ, DEPT WHERE DNAME='MARKETING' AND PROJ.DNO=DEPT.DNO
+       *
+ERROR at line 1:
+ORA-00904: "PNAME": invalid identifier 
+
+
+SQL> 
+SQL> SELECT PRJ_NAME FROM PROJ, DEPT WHERE DNAME='MARKETING' AND PROJ.DNO=DEPT.DNO;
+
+PRJ_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+APP_DEV                                                                                                                                                                                                 
+
+SQL> 
+SQL> SELECT UPPER(ENAME) FROM EMP;
+
+UPPER(ENAM                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+RAVI                                                                                                                                                                                                    
+RAVIRAJ                                                                                                                                                                                                 
+RAGHU                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+RAJ                                                                                                                                                                                                     
+RAJ                                                                                                                                                                                                     
+MANU                                                                                                                                                                                                    
+MANOJ                                                                                                                                                                                                   
+VISHWAS                                                                                                                                                                                                 
+MAHESH                                                                                                                                                                                                  
+VIJAY                                                                                                                                                                                                   
+
+UPPER(ENAM                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+PUSHPA                                                                                                                                                                                                  
+KISHORE                                                                                                                                                                                                 
+
+13 rows selected.
+
+SQL> 
+SQL> SELECT LOWER(ENAME) FROM EMP
+  2  ;
+
+LOWER(ENAM                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+ravi                                                                                                                                                                                                    
+raviraj                                                                                                                                                                                                 
+raghu                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+raj                                                                                                                                                                                                     
+raj                                                                                                                                                                                                     
+manu                                                                                                                                                                                                    
+manoj                                                                                                                                                                                                   
+vishwas                                                                                                                                                                                                 
+mahesh                                                                                                                                                                                                  
+vijay                                                                                                                                                                                                   
+
+LOWER(ENAM                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+pushpa                                                                                                                                                                                                  
+kishore                                                                                                                                                                                                 
+
+13 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
+SQL> 
+SQL> SELECT INITCAP(ENAME) FROM EMP;
+
+INITCAP(EN                                                                      
+----------                                                                      
+Ravi                                                                            
+Raviraj                                                                         
+Raghu                                                                           
+                                                                                
+Raj                                                                             
+Raj                                                                             
+Manu                                                                            
+Manoj                                                                           
+Vishwas                                                                         
+Mahesh                                                                          
+Vijay                                                                           
+
+INITCAP(EN                                                                      
+----------                                                                      
+Pushpa                                                                          
+Kishore                                                                         
+
+13 rows selected.
+
+SQL> SELECT LENGTH(ENAME) FROM EMP;
+
+LENGTH(ENAME)                                                                   
+-------------                                                                   
+            4                                                                   
+            7                                                                   
+            5                                                                   
+                                                                                
+            3                                                                   
+            3                                                                   
+            4                                                                   
+            5                                                                   
+            7                                                                   
+            6                                                                   
+            5                                                                   
+
+LENGTH(ENAME)                                                                   
+-------------                                                                   
+            6                                                                   
+            7                                                                   
+
+13 rows selected.
+
+SQL> 
+SQL> SELECT SUBSTR(ENAME,2,3) FROM EMP;
+
+SUBSTR(ENAME                                                                    
+------------                                                                    
+AVI                                                                             
+AVI                                                                             
+AGH                                                                             
+                                                                                
+AJ                                                                              
+AJ                                                                              
+ANU                                                                             
+ANO                                                                             
+ISH                                                                             
+AHE                                                                             
+IJA                                                                             
+
+SUBSTR(ENAME                                                                    
+------------                                                                    
+USH                                                                             
+ISH                                                                             
+
+13 rows selected.
+
+SQL> 
+SQL> SELECT ENAME FROM EMP E1,EMP E2 WHERE E1.EMPNO=E2.EMPNO AND E2.ENAME='RAGHU';
+SELECT ENAME FROM EMP E1,EMP E2 WHERE E1.EMPNO=E2.EMPNO AND E2.ENAME='RAGHU'
+       *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> 
+SQL> SELECT ENAME FROM EMP E1,EMP E2 WHERE E2.ENAME='RAGHU';
+SELECT ENAME FROM EMP E1,EMP E2 WHERE E2.ENAME='RAGHU'
+       *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> 
+SQL> SELECT ENAME FROM EMP WHERE EMPNO=SELECT EMPNO FROM ENAME='RAGHU';
+SELECT ENAME FROM EMP WHERE EMPNO=SELECT EMPNO FROM ENAME='RAGHU'
+                                  *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT ENAME FROM EMP WHERE EMPNO=SELECT EMPNO FROM EMP WHERE ENAME='RAGHU';
+SELECT ENAME FROM EMP WHERE EMPNO=SELECT EMPNO FROM EMP WHERE ENAME='RAGHU'
+                                  *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT ENAME FROM EMP WHERE EMPNO=(SELECT EMPNO FROM EMP WHERE ENAME='RAGHU');
+
+ENAME                                                                           
+----------                                                                      
+RAGHU                                                                           
+
+SQL> SELECT ENAME FROM EMP WHERE MGRID=(SELECT EMPNO FROM EMP WHERE ENAME='RAGHU');
+
+ENAME                                                                           
+----------                                                                      
+RAVI                                                                            
+RAJ                                                                             
+RAJ                                                                             
+VISHWAS                                                                         
+MAHESH                                                                          
+VIJAY                                                                           
+
+6 rows selected.
+
+SQL> 
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DNAME WHERE DEPTNO=DNO GROUP BY DNO;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DNAME WHERE DEPTNO=DNO GROUP BY DNO
+                                        *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT
+  2  
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT WHERE DEPTNO=DNO GROUP BY DNO;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT WHERE DEPTNO=DNO GROUP BY DNO
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> 
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT GROUP BY DEPTNO WHERE DEPTNO=DNO;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT GROUP BY DEPTNO WHERE DEPTNO=DNO
+                                                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT GROUP BY DEPTNO;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT GROUP BY DEPTNO
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> 
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP GROUP BY DEPTNO, DEPT WHERE DEPTNO=DNO;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP GROUP BY DEPTNO, DEPT WHERE DEPTNO=DNO
+                                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP GROUP BY DEPTNO;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP GROUP BY DEPTNO
+       *
+ERROR at line 1:
+ORA-00904: "DNAME": invalid identifier 
+
+
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT WHERE DEPTNO=DNO ;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT WHERE DEPTNO=DNO 
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO ;
+SELECT DNAME,MAX(SAL),MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO 
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT DNAME FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO ;
+
+DNAME                                                                           
+----------                                                                      
+MARKETING                                                                       
+MARKETING                                                                       
+MARKETING                                                                       
+MARKETING                                                                       
+HR                                                                              
+RESEARCH                                                                        
+RESEARCH                                                                        
+IT                                                                              
+MARKETING                                                                       
+ACCOUNTS                                                                        
+FINANCE                                                                         
+
+11 rows selected.
+
+SQL> SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO ;
+SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO 
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL>  SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO GROUP BY DNAME ;\
+  2   SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO GROUP BY DNAME ;\
+  3  SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO ;
+ SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO GROUP BY DNAME ;\
+                                                                              *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL>  SELECT DNAME,MIN(SAL) FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO GROUP BY DNAME ;
+
+DNAME        MIN(SAL)                                                           
+---------- ----------                                                           
+RESEARCH        30000                                                           
+FINANCE         23000                                                           
+ACCOUNTS        28000                                                           
+HR              50000                                                           
+MARKETING       24000                                                           
+IT              35000                                                           
+
+6 rows selected.
+
+SQL> 
+SQL> SELECT COUNT(EMPNO),DNAME FROM EMP,DEPT WHERE EMP.DEPTNO=DEPT.DNO GROUP BY DNAME;
+
+COUNT(EMPNO) DNAME                                                              
+------------ ----------                                                         
+           2 RESEARCH                                                           
+           1 FINANCE                                                            
+           1 ACCOUNTS                                                           
+           1 HR                                                                 
+           5 MARKETING                                                          
+           1 IT                                                                 
+
+6 rows selected.
+
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(8)
+
+SQL> SELECT * FROM EMP WHERE CURDATE()-DATE_JOIN=7;
+SELECT * FROM EMP WHERE CURDATE()-DATE_JOIN=7
+                        *
+ERROR at line 1:
+ORA-00904: "CURDATE": invalid identifier 
+
+
+SQL> SELECT CURDATE();
+SELECT CURDATE()
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT NOW;
+SELECT NOW
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT NOW();
+SELECT NOW()
+           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> NOW();
+SP2-0042: unknown command "NOW()" - rest of line ignored.
+SQL> 
+SQL> SELECT * FROM EMP WHERE CURRENT_DATE-DATE_JOIN=7;
+
+no rows selected
+
+SQL> SELECT * FROM EMP WHERE CURRENT_DATE-DATE_JOIN>7;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       101 RAVI       MGR              111 10-OCT-85      32000            D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 RAVIRAJ    CLRK             106 10-DEC-80      24000       1000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 RAGHU      GM               150 10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       150            CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+       170 RAJ        CLRK             111 10-DEC-80                  1000 D1   
+03-DEC-85 P1                                                                    
+                                                                                
+       171 RAJ        CLRK             111 02-OCT-80                  1000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       125 MANU       A.MGR            150 10-DEC-80      50000      16000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 MANOJ      CLRK             125 02-OCT-80      65000      23000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 VISHWAS    MGR              111 02-OCT-86      30000      10000 D2   
+02-OCT-89                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       123 MAHESH     MGR              111 10-DEC-74      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       103 VIJAY      CLRK             111 10-DEC-70      40000          0 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       142 PUSHPA     CLRK                 10-DEC-80      28000          0 D5   
+11-DEC-80 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       108 KISHORE    CLRK                 10-DEC-70      23000          0 D7   
+02-OCT-85                                                                       
+                                                                                
+
+13 rows selected.
+
+SQL> 
+SQL> SELECT * FROM EMP WHERE CURRENT_DATE-DATE_JOIN>5;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       101 RAVI       MGR              111 10-OCT-85      32000            D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 RAVIRAJ    CLRK             106 10-DEC-80      24000       1000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 RAGHU      GM               150 10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       150            CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+       170 RAJ        CLRK             111 10-DEC-80                  1000 D1   
+03-DEC-85 P1                                                                    
+                                                                                
+       171 RAJ        CLRK             111 02-OCT-80                  1000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       125 MANU       A.MGR            150 10-DEC-80      50000      16000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 MANOJ      CLRK             125 02-OCT-80      65000      23000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 VISHWAS    MGR              111 02-OCT-86      30000      10000 D2   
+02-OCT-89                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       123 MAHESH     MGR              111 10-DEC-74      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       103 VIJAY      CLRK             111 10-DEC-70      40000          0 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       142 PUSHPA     CLRK                 10-DEC-80      28000          0 D5   
+11-DEC-80 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       108 KISHORE    CLRK                 10-DEC-70      23000          0 D7   
+02-OCT-85                                                                       
+                                                                                
+
+13 rows selected.
+
+SQL> 
+SQL> SELECT * FROM EMP WHERE EXTRACT (MONTH FROM DATE_BIRTH)=12;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       102 RAVIRAJ    CLRK             106 10-DEC-80      24000       1000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 RAGHU      GM               150 10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+       150            CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       170 RAJ        CLRK             111 10-DEC-80                  1000 D1   
+03-DEC-85 P1                                                                    
+                                                                                
+       125 MANU       A.MGR            150 10-DEC-80      50000      16000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       123 MAHESH     MGR              111 10-DEC-74      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       103 VIJAY      CLRK             111 10-DEC-70      40000          0 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       142 PUSHPA     CLRK                 10-DEC-80      28000          0 D5   
+11-DEC-80 P3                                                                    
+                                                                                
+       108 KISHORE    CLRK                 10-DEC-70      23000          0 D7   
+02-OCT-85                                                                       
+                                                                                
+
+9 rows selected.
+
+SQL> 
+SQL> SELECT * FROM EMP WHERE EXTRACT (YEAR FROM DATE_BIRTH)=2000;
+
+no rows selected
+
+SQL> UPDATE EMP SET DATE_BIRTH=TO_DATE('01-01-2000','DD-MM-YYYY') WHERE EMPNO=123;
+
+1 row updated.
+
+SQL> SELECT * FROM EMP WHERE CURRENT_DATE-DATE_JOIN=7;
+
+no rows selected
+
+SQL> SELECT * FROM EMP WHERE CURRENT_DATE-DATE_JOIN>5;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       101 RAVI       MGR              111 10-OCT-85      32000            D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 RAVIRAJ    CLRK             106 10-DEC-80      24000       1000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 RAGHU      GM               150 10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       150            CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+       170 RAJ        CLRK             111 10-DEC-80                  1000 D1   
+03-DEC-85 P1                                                                    
+                                                                                
+       171 RAJ        CLRK             111 02-OCT-80                  1000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       125 MANU       A.MGR            150 10-DEC-80      50000      16000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 MANOJ      CLRK             125 02-OCT-80      65000      23000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 VISHWAS    MGR              111 02-OCT-86      30000      10000 D2   
+02-OCT-89                                                                       
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       123 MAHESH     MGR              111 01-JAN-00      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       103 VIJAY      CLRK             111 10-DEC-70      40000          0 D1   
+02-OCT-01 P3                                                                    
+                                                                                
+       142 PUSHPA     CLRK                 10-DEC-80      28000          0 D5   
+11-DEC-80 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       108 KISHORE    CLRK                 10-DEC-70      23000          0 D7   
+02-OCT-85                                                                       
+                                                                                
+
+13 rows selected.
+
+SQL> SELECT * FROM EMP WHERE EMPNO=123
+  2  ;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       123 MAHESH     MGR              111 01-JAN-00      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+
+SQL> SELECT * FROM EMP WHERE EXTRACT (YEAR FROM DATE_BIRTH)=2000;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       123 MAHESH     MGR              111 01-JAN-00      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+
+SQL> SET LINESIZE 200;
+SQL> 
+SQL> SELECT TO_DATE(DATE_BIRTH,'DD-MM-YYYY') FROM EMP;
+ERROR:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+
+no rows selected
+
+SQL> SELECT TO_DATE(DATE_BIRTH,'DD-MM-YY') FROM EMP;
+
+TO_DATE(D                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+10-OCT-85                                                                                                                                                                                               
+10-DEC-80                                                                                                                                                                                               
+10-DEC-74                                                                                                                                                                                               
+10-DEC-70                                                                                                                                                                                               
+10-DEC-80                                                                                                                                                                                               
+02-OCT-80                                                                                                                                                                                               
+10-DEC-80                                                                                                                                                                                               
+02-OCT-80                                                                                                                                                                                               
+02-OCT-86                                                                                                                                                                                               
+01-JAN-00                                                                                                                                                                                               
+10-DEC-70                                                                                                                                                                                               
+
+TO_DATE(D                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+10-DEC-80                                                                                                                                                                                               
+10-DEC-70                                                                                                                                                                                               
+
+13 rows selected.
+
+SQL> SELECT EMPNO,TO_DATE(DATE_BIRTH,'DD-MM-YY') FROM EMP;
+
+     EMPNO TO_DATE(D                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+       101 10-OCT-85                                                                                                                                                                                    
+       102 10-DEC-80                                                                                                                                                                                    
+       111 10-DEC-74                                                                                                                                                                                    
+       150 10-DEC-70                                                                                                                                                                                    
+       170 10-DEC-80                                                                                                                                                                                    
+       171 02-OCT-80                                                                                                                                                                                    
+       125 10-DEC-80                                                                                                                                                                                    
+       104 02-OCT-80                                                                                                                                                                                    
+       106 02-OCT-86                                                                                                                                                                                    
+       123 01-JAN-00                                                                                                                                                                                    
+       103 10-DEC-70                                                                                                                                                                                    
+
+     EMPNO TO_DATE(D                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+       142 10-DEC-80                                                                                                                                                                                    
+       108 10-DEC-70                                                                                                                                                                                    
+
+13 rows selected.
+
+SQL> SPOOL OFF;

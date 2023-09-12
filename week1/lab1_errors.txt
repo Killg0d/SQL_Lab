@@ -1,0 +1,55 @@
+
+SQL> ALTER TABLE EMP
+  2  ADD PRJ_ID varchar2(8) [CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY PRJ_ID REFERENCES PROJ];
+ADD PRJ_ID varchar2(8) [CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY PRJ_ID REFERENCES PROJ]
+                       *
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE EMP
+  2  ADD PRJ_ID varchar2(8) CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY PRJ_ID REFERENCES PROJ;
+ADD PRJ_ID varchar2(8) CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY PRJ_ID REFERENCES PROJ
+                       *
+ERROR at line 2:
+ORA-02253: constraint specification not allowed here
+
+
+SQL> ALTER TABLE emp MODIFY project_id varchar2(8) CONSTRAINT proj_fk_emp_project_id FOREIGN KEY (project_id) REFERENCES proj (DNO,PROJ_NO);
+ALTER TABLE emp MODIFY project_id varchar2(8) CONSTRAINT proj_fk_emp_project_id FOREIGN KEY (project_id) REFERENCES proj (DNO,PROJ_NO)
+                                              *
+ERROR at line 1:
+ORA-02253: constraint specification not allowed here
+
+
+SQL> ALTER TABLE EMP
+  2  ADD PRJ_ID varchar2(8);
+
+Table altered.
+
+SQL> ALTER TABLE EMP
+  2  ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY PRJ_ID REFERENCES PROJ(DNO,PROJ_NO);
+ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY PRJ_ID REFERENCES PROJ(DNO,PROJ_NO)
+                                                 *
+ERROR at line 2:
+ORA-00906: missing left parenthesis
+
+
+SQL> ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY (PRJ_ID) REFERENCES PROJ(DNO,PROJ_NO);
+SP2-0734: unknown command beginning "ADD CONSTR..." - rest of line ignored.
+SQL> ALTER TABLE EMP
+  2  ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY (PRJ_ID) REFERENCES PROJ(DNO,PROJ_NO);
+ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY (PRJ_ID) REFERENCES PROJ(DNO,PROJ_NO)
+                                                                                     *
+ERROR at line 2:
+ORA-02256: number of referencing columns must match referenced columns
+
+
+SQL> ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY (PRJ_ID) REFERENCES PROJ;
+SP2-0734: unknown command beginning "ADD CONSTR..." - rest of line ignored.
+SQL> ALTER TABLE EMP
+  2  ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY (PRJ_ID) REFERENCES PROJ;
+ADD CONSTRAINT PROJ_FK_DNOPRJNO_Cons FOREIGN KEY (PRJ_ID) REFERENCES PROJ
+                                                                     *
+ERROR at line 2:
+ORA-02256: number of referencing columns must match referenced columns

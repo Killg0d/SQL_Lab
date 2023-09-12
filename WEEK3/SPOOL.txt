@@ -1,0 +1,539 @@
+SQL> SPOOL OFF;
+SQL> SPOOL OFF;
+SQL> INSERT INTO DEPT VALUES ('D1','MARKETING','CHN',500000);
+INSERT INTO DEPT VALUES ('D1','MARKETING','CHN',500000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA040.DNO_UNQ_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO DEPT VALUES ('D2','RESEARCH','MNG',300000);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO DEPT VALUES ('D3','IT','NNG',400000);
+INSERT INTO DEPT VALUES ('D3','IT','NNG',400000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.VALID_LOC_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO DEPT VALUES ('D3','IT','BNG',400000);
+
+1 row created.
+
+SQL> INSERT INTO DEPT VALUES ('D4','HR','BGG',200000);
+INSERT INTO DEPT VALUES ('D4','HR','BGG',200000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.VALID_LOC_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO DEPT VALUES ('D5','ACCOUNTS','BNG',500000);
+
+1 row created.
+
+SQL> INSERT INTO DEPT VALUES (NULL,'CORPORATE','HYD',700000);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO DEPT VALUES (D1,'MARKETING','CHN',50000);
+INSERT INTO DEPT VALUES (D1,'MARKETING','CHN',50000)
+                         *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO DEPT VALUES ('1','MARKETING','CHN',50000);
+INSERT INTO DEPT VALUES ('1','MARKETING','CHN',50000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.D_LIKEDNO_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> DESC PROJ;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                    NOT NULL VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+ PRJ_FUND                                           NUMBER(7)
+
+SQL> INSERT INTO PROJ(DNO,PRJ_NO,PRJ_CREDITS,PRJ_FUND) VALUES('D1','P1',4,400000);
+INSERT INTO PROJ(DNO,PRJ_NO,PRJ_CREDITS,PRJ_FUND) VALUES('D1','P1',4,400000)
+                            *
+ERROR at line 1:
+ORA-00904: "PRJ_CREDITS": invalid identifier 
+
+
+SQL> INSERT INTO PROJ(DNO,PRJ_NO,PRJ_CREDIT,PRJ_FUND) VALUES('D1','P1',4,400000);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO PROJ VALUES('D2','P1','BIG DATA',2,200000);
+INSERT INTO PROJ VALUES('D2','P1','BIG DATA',2,200000)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO PROJ VALUES('D2','P1','BIG DATA',2,TO_DATE('21-09-2001','DD-MM-YYYY'),TO_DATE('20-09-2040','DD-MM-YYYY'),200000);
+
+1 row created.
+
+SQL> INSERT INTO PROJ VALUES('D3','P2','W3',3,TO_DATE('21-09-1990','DD-MM-YYYY'),TO_DATE('20-08-2025','DD-MM-YYYY'),300000);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO PROJ VALUES('D1','P3','APP_DEV',5,TO_DATE('21-09-2018','DD-MM-YYYY'),TO_DATE('20-09-2016','DD-MM-YYYY'),500000);
+INSERT INTO PROJ VALUES('D1','P3','APP_DEV',5,TO_DATE('21-09-2018','DD-MM-YYYY'),TO_DATE('20-09-2016','DD-MM-YYYY'),500000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.ENDDATE_GRT_STRT_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO PROJ VALUES('D1','P3','APP_DEV',5,TO_DATE('21-09-2015','DD-MM-YYYY'),TO_DATE('20-09-2024','DD-MM-YYYY'),500000);
+
+1 row created.
+
+SQL> INSERT INTO PROJ VALUES('D1','P2','ML',7,TO_DATE('21-09-2001','DD-MM-YYYY'),TO_DATE('20-09-2040','DD-MM-YYYY'),700000);
+
+1 row created.
+
+SQL> INSERT INTO PROJ VALUES('D','P2','ML',7,TO_DATE('21-09-2001','DD-MM-YYYY'),TO_DATE('20-09-2040','DD-MM-YYYY'),700000);
+INSERT INTO PROJ VALUES('D','P2','ML',7,TO_DATE('21-09-2001','DD-MM-YYYY'),TO_DATE('20-09-2040','DD-MM-YYYY'),700000)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA040.DNO_FK_DEPT_CONS) violated - parent key 
+not found 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO PROJ VALUES('6','P2','ML',7,TO_DATE('21-09-2001','DD-MM-YYYY'),TO_DATE('20-09-2040','DD-MM-YYYY'),700000);
+INSERT INTO PROJ VALUES('6','P2','ML',7,TO_DATE('21-09-2001','DD-MM-YYYY'),TO_DATE('20-09-2040','DD-MM-YYYY'),700000)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA040.DNO_FK_DEPT_CONS) violated - parent key 
+not found 
+
+
+SQL> SELECT * FROM PROJ;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  P1                        4                         400000                  
+D2  P1    BIG DATA            2 21-SEP-01 20-SEP-40     200000                  
+D3  P2    W3                  3 21-SEP-90 20-AUG-25     300000                  
+D1  P3    APP_DEV             5 21-SEP-15 20-SEP-24     500000                  
+D1  P2    ML                  7 21-SEP-01 20-SEP-40     700000                  
+
+SQL> SELECT * FROM DEPT;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  MARKETING  CHN            500000                                            
+D2  RESEARCH   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D5  ACCOUNTS   BNG            500000                                            
+    CORPORATE  HYD            700000                                            
+
+SQL> INSERT INTO DEPT VALUES ('D4','HR','BNG',200000);
+
+1 row created.
+
+SQL> INSERT INTO DEPT VALUES ('D6','SALES','HYD',400000);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> SELECT * FROM DEPT;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  MARKETING  CHN            500000                                            
+D2  RESEARCH   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D5  ACCOUNTS   BNG            500000                                            
+    CORPORATE  HYD            700000                                            
+D4  HR         BNG            200000                                            
+D6  SALES      HYD            400000                                            
+
+7 rows selected.
+
+SQL> SELECT * FROM PROJ;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  P1                        4                         400000                  
+D2  P1    BIG DATA            2 21-SEP-01 20-SEP-40     200000                  
+D3  P2    W3                  3 21-SEP-90 20-AUG-25     300000                  
+D1  P3    APP_DEV             5 21-SEP-15 20-SEP-24     500000                  
+D1  P2    ML                  7 21-SEP-01 20-SEP-40     700000                  
+
+SQL> UPDATE PROJ SET DNO='D4' WHERE PRJ_NAME='ML';
+
+1 row updated.
+
+SQL> SELECT * FROM PROJ;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  P1                        4                         400000                  
+D2  P1    BIG DATA            2 21-SEP-01 20-SEP-40     200000                  
+D3  P2    W3                  3 21-SEP-90 20-AUG-25     300000                  
+D1  P3    APP_DEV             5 21-SEP-15 20-SEP-24     500000                  
+D4  P2    ML                  7 21-SEP-01 20-SEP-40     700000                  
+
+SQL> 
+SQL> INSERT INTO PROJ VALUES('D5','P3','DATA SCIENCE',4,TO_DATE('21-09-2021','DD-MM-YYYY'),TO_DATE('20-09-2022','DD-MM-YYYY'),200000);
+INSERT INTO PROJ VALUES('D5','P3','DATA SCIENCE',4,TO_DATE('21-09-2021','DD-MM-YYYY'),TO_DATE('20-09-2022','DD-MM-YYYY'),200000)
+                                  *
+ERROR at line 1:
+ORA-12899: value too large for column "MCA040"."PROJ"."PRJ_NAME" (actual: 12, 
+maximum: 10) 
+
+
+SQL> INSERT INTO PROJ VALUES('D5','P3','DATA_SCI',4,TO_DATE('21-09-2021','DD-MM-YYYY'),TO_DATE('20-09-2022','DD-MM-YYYY'),200000);
+
+1 row created.
+
+SQL> INSERT INTO PROJ VALUES('D6','P1','THEORY',4,TO_DATE('21-09-2000','DD-MM-YYYY'),TO_DATE('21-01-2027','DD-MM-YYYY'),100000);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> SELECT * FROM DEPT;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  MARKETING  CHN            500000                                            
+D2  RESEARCH   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D5  ACCOUNTS   BNG            500000                                            
+    CORPORATE  HYD            700000                                            
+D4  HR         BNG            200000                                            
+D6  SALES      HYD            400000                                            
+
+7 rows selected.
+
+SQL> SELECT * FROM PROJ;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  P1                        4                         400000                  
+D2  P1    BIG DATA            2 21-SEP-01 20-SEP-40     200000                  
+D3  P2    W3                  3 21-SEP-90 20-AUG-25     300000                  
+D1  P3    APP_DEV             5 21-SEP-15 20-SEP-24     500000                  
+D4  P2    ML                  7 21-SEP-01 20-SEP-40     700000                  
+D5  P3    DATA_SCI            4 21-SEP-21 20-SEP-22     200000                  
+D6  P1    THEORY              4 21-SEP-00 21-JAN-27     100000                  
+
+7 rows selected.
+
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(8)
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO EMP VALUES(100,'RAVI','MGR',111,TO_DATE('10-10-1985','DD-MM-YYYY'),32000,NULL,D1,TO_DATE('2-10-2001','DD-MM-YYYY'),'P1');
+INSERT INTO EMP VALUES(100,'RAVI','MGR',111,TO_DATE('10-10-1985','DD-MM-YYYY'),32000,NULL,D1,TO_DATE('2-10-2001','DD-MM-YYYY'),'P1')
+                                                                                          *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO EMP VALUES(100,'RAVI','MGR',111,TO_DATE('10-10-1985','DD-MM-YYYY'),32000,NULL,'D1',TO_DATE('2-10-2001','DD-MM-YYYY'),'P1');
+INSERT INTO EMP VALUES(100,'RAVI','MGR',111,TO_DATE('10-10-1985','DD-MM-YYYY'),32000,NULL,'D1',TO_DATE('2-10-2001','DD-MM-YYYY'),'P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.VALID_EMPNO_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> SELECT * FROM USER_CONS_COLUMNS WHERE COLUMN_NAME='COMM';
+
+no rows selected
+
+SQL> INSERT INTO EMP VALUES(102,'RAVIRAJ','CLRK',106,TO_DATE('10-12-1980','DD-MM-YYYY'),24000,,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3');
+INSERT INTO EMP VALUES(102,'RAVIRAJ','CLRK',106,TO_DATE('10-12-1980','DD-MM-YYYY'),24000,,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3')
+                                                                                         *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT * FROM EMP;
+
+no rows selected
+
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(8)
+
+SQL> INSERT INTO EMP(EMP_NO,ENAME,JOB,MGRID,DATE_BIRTH,SAL,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(102,'RAVIRAJ','CLRK',106,TO_DATE('10-12-1980','DD-MM-YYYY'),24000,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3');
+INSERT INTO EMP(EMP_NO,ENAME,JOB,MGRID,DATE_BIRTH,SAL,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(102,'RAVIRAJ','CLRK',106,TO_DATE('10-12-1980','DD-MM-YYYY'),24000,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3')
+                *
+ERROR at line 1:
+ORA-00904: "EMP_NO": invalid identifier 
+
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,MGRID,DATE_BIRTH,SAL,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(102,'RAVIRAJ','CLRK',106,TO_DATE('10-12-1980','DD-MM-YYYY'),24000,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3');
+INSERT INTO EMP(EMPNO,ENAME,JOB,MGRID,DATE_BIRTH,SAL,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(102,'RAVIRAJ','CLRK',106,TO_DATE('10-12-1980','DD-MM-YYYY'),24000,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA040.MGR_FK_EMP_NO_CONS) violated - parent 
+key not found 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(102,'RAVIRAJ','CLRK',TO_DATE('10-12-1980','DD-MM-YYYY'),24000,'D1',TO_DATE('12-11-2000','DD-MM-YYYY'),'P3');
+
+1 row created.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       102 RAVIRAJ    CLRK                 10-DEC-80      24000       1000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(111,'RAGHU','GM',TO_DATE('10-12-1974'),45000,15000,NULL,TO_DATE('3-12-1985'),NULL);
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(111,'RAGHU','GM',TO_DATE('10-12-1974'),45000,15000,NULL,TO_DATE('3-12-1985'),NULL)
+                                                                                                             *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(111,'RAGHU','GM',TO_DATE('10-12-1974','DD-MM-YYYY'),45000,15000,NULL,TO_DATE('3-12-1985','DD-MM-YYYY'),NULL);
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> INSERT INTO EMP(EMPNO,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(111,'CEO',TO_DATE('10-12-1970','DD-MM-YYYY'),60000,30000,NULL,TO_DATE('3-12-1990','DD-MM-YYYY'),NULL);
+INSERT INTO EMP(EMPNO,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(111,'CEO',TO_DATE('10-12-1970','DD-MM-YYYY'),60000,30000,NULL,TO_DATE('3-12-1990','DD-MM-YYYY'),NULL)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA040.SYS_C0064206) violated 
+
+
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(150,'CEO',TO_DATE('10-12-1970','DD-MM-YYYY'),60000,30000,NULL,TO_DATE('3-12-1990','DD-MM-YYYY'),NULL);
+
+1 row created.
+
+SQL> UPDATE EMP SET MGRID='NULL' WHERE EMPNO=150;
+UPDATE EMP SET MGRID='NULL' WHERE EMPNO=150
+                     *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> UPDATE EMP SET MGRID=NULL WHERE EMPNO=150;
+
+1 row updated.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_ID                                                                
+--------- --------                                                              
+       102 RAVIRAJ    CLRK                 10-DEC-80      24000       1000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 RAGHU      GM                   10-DEC-74      45000      15000      
+03-DEC-85                                                                       
+                                                                                
+       150            CEO                  10-DEC-70      60000      30000      
+03-DEC-90                                                                       
+                                                                                
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(103,'RAJ','A.CLRK',TO_DATE('10-12-1980','DD-MM-YYYY'),'D1',TO_DATE('3-12-1985','DD-MM-YYYY'),'P1');
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(103,'RAJ','A.CLRK',TO_DATE('10-12-1980','DD-MM-YYYY'),'D1',TO_DATE('3-12-1985','DD-MM-YYYY'),'P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.JOB_CHK_CONS) violated 
+
+
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(103,'RAJ','CLRK',TO_DATE('2-10-1980','DD-MM-YYYY'),'D1',TO_DATE('2-10-2002','DD-MM-YYYY'),'P3');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(125,'MANOJ','A.MGR',TO_DATE('10-12-1980','DD-MM-YYYY'),50000,16000,'D4',TO_DATE('2-10-2002','DD-MM-YYYY'),'P2');
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID) VALUES(125,'MANOJ','A.MGR',TO_DATE('10-12-1980','DD-MM-YYYY'),50000,16000,'D4',TO_DATE('2-10-2002','DD-MM-YYYY'),'P2')
+                                           *
+ERROR at line 1:
+ORA-01747: invalid user.table.column, table.column, or column specification 
+
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (125,'MANOJ','A.MGR',TO_DATE('10-12-1980','DD-MM-YYYY'),50000,16000,'D4',TO_DATE('2-10-2002','DD-MM-YYYY'),'P2');
+
+1 row created.
+
+SQL> 
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(8)
+
+SQL> DESC DEPT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                                VARCHAR2(3)
+ DNAME                                              VARCHAR2(10)
+ LOCATION                                           VARCHAR2(9)
+ DEPT_BUDGET                                        NUMBER(7)
+
+SQL> DESC PROJ;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                    NOT NULL VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+ PRJ_FUND                                           NUMBER(7)
+
+SQL> UPDATE SET ENAME='MANU' WHERE EMPNO=125;
+UPDATE SET ENAME='MANU' WHERE EMPNO=125
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> UPDATE EMP SET ENAME='MANU' WHERE EMPNO=125;
+
+1 row updated.
+
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (104,'MANOJ','CLERK',TO_DATE('2-10-1980','DD-MM-YYYY'),65000,23000,'D2',TO_DATE('2-10-2005','DD-MM-YYYY'),'P1');
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.JOB_CHK_CONS) violated 
+
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (104,'MANOJ','CLRK',TO_DATE('2-10-1980','DD-MM-YYYY'),65000,23000,'D2',TO_DATE('2-10-2005','DD-MM-YYYY'),'P1');
+
+1 row created.
+
+SQL>  INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (106,'VISHWAS','MGR',TO_DATE('2-10-1986','DD-MM-YYYY'),10000,900,'D2',TO_DATE('2-10-1985','DD-MM-YYYY'),NULL);
+ INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.DB_LESS_DBJOIN_CONS) violated 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (106,'VISHWAS','MGR',TO_DATE('2-10-1986','DD-MM-YYYY'),10000,900,'D2',TO_DATE('2-10-1989','DD-MM-YYYY'),NULL);
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA040.SAL_20K_MORE_CONS) violated 
+
+
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (106,'VISHWAS','MGR',TO_DATE('2-10-1986','DD-MM-YYYY'),30000,900,'D2',TO_DATE('2-10-1989','DD-MM-YYYY'),NULL);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (123,'MAHESH','CLRK',TO_DATE('10-12-1974','DD-MM-YYYY'),25000,900,'D3',TO_DATE('2-10-2002','DD-MM-YYYY'),'P2');
+
+1 row created.
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (108,'KISHORE','CLRK',TO_DATE('10-12-1970','DD-MM-YYYY'),23000,0,'D9',TO_DATE('2-10-1985','DD-MM-YYYY'),NULL);
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA040.DEPTNO_FK_DEPT_CONS) violated - parent 
+key not found 
+
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (103,'VIJAY','CLRK',TO_DATE('10-12-1970','DD-MM-YYYY'),40000,0,'D1',TO_DATE('2-10-2001','DD-MM-YYYY'),'P3');
+INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA040.SYS_C0064206) violated 
+
+
+SQL> DELETE FROM EMP WHERE EMPNO=103;
+
+1 row deleted.
+
+SQL> INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (103,'VIJAY','CLRK',TO_DATE('10-12-1970','DD-MM-YYYY'),40000,0,'D1',TO_DATE('2-10-2001','DD-MM-YYYY'),'P3');
+
+1 row created.
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;
+SQL> 
+SQL>  INSERT INTO EMP(EMPNO,ENAME,JOB,DATE_BIRTH,SAL,COMM,DEPTNO,DATE_JOIN,PRJ_ID)
+  2   VALUES        (NULL,'PUSHPA','CLRK',TO_DATE('10-12-1980','DD-MM-YYYY'),18000,0,'D5',TO_DATE('10-12-1980','DD-MM-YYYY'),'P3');
+ VALUES        (NULL,'PUSHPA','CLRK',TO_DATE('10-12-1980','DD-MM-YYYY'),18000,0,'D5',TO_DATE('10-12-1980','DD-MM-YYYY'),'P3')
+                *
+ERROR at line 2:
+ORA-01400: cannot insert NULL into ("MCA040"."EMP"."EMPNO") 
+
+
+SQL> SPOOL D:\oraclePrg\230970005\lab\WEEK3\SPOOL.txt APPEND;

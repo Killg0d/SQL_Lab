@@ -1,0 +1,41 @@
+SQL> DELETE FROM EMP WHERE PRJ_ID='P3';
+
+4 rows deleted.
+
+SQL> /*WORKING*/
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> 
+SQL> DELETE FROM DEPT WHERE  DNAME='ACCOUNTS';
+DELETE FROM DEPT WHERE  DNAME='ACCOUNTS'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCA040.DNO_FK_DEPT_CONS) violated - child 
+record found 
+
+
+SQL> /*NOT WORKING FK VIOLATED*/
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> 
+SQL> DELETE FROM EMP WHERE EMPNO=125 AND PRJ_ID='P2';
+DELETE FROM EMP WHERE EMPNO=125 AND PRJ_ID='P2'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCA040.MGR_FK_EMP_NO_CONS) violated - child 
+record found 
+
+
+SQL> /*NOT WORKING FK VIOLATED*/
+SQL> 
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SPOOL;
+currently spooling to D:\oraclePrg\230970005\lab\WEEK4\SPOOL4.txt
+SQL> SPOOL ON;
