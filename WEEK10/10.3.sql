@@ -1,0 +1,3 @@
+-- Write a PL/SQL block trigger to do INSERT/UPDATE/DELETE operation only during
+-- week days. Raise an exception if the day is SAT or SUN and also display user who
+-- initiated operation
