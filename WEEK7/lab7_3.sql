@@ -1,7 +1,7 @@
 --Write a PL/SQL block to accept employee number and display Employee Name,--
 --Department name, salary of employees in the format – ‘RAVI works in Marketing--
 --department and draws 32000/- as salary’.--
-set severoutput on;
+set serveroutput on;
 DECLARE
     v_emp emp%rowtype;
     v_dept dept%rowtype;
