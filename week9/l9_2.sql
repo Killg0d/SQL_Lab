@@ -1,3 +1,7 @@
+-- Write a PL/SQL block to accept, Principle, Interest rate and duration (in years) to
+-- calculate Interest to be paid. Handle the exceptions if Principle <=1000, interest rate
+-- <5, year <1 and display proper error message for each.
+
 set serveroutput on;
 set verify off;
 

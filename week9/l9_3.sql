@@ -1,3 +1,10 @@
+-- Write a PL/SQL block to accept employee number from user and display employee
+-- details such as Empno, Name, and Sal. Handle the exception raised through user defined
+-- messages –
+-- (i) If user entered a non–existing employee number.
+-- (ii) If the salary more than 25000/-
+-- If employee exists and salary is less than 25000/- then update that salary to 25000/-
+
 set serveroutput on;
 set verify off;
 

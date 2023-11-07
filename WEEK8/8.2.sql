@@ -15,11 +15,11 @@ DECLARE
 BEGIN  
     for rec in cur_prj loop
         incentives:=rec.prj_fund*rec.prj_credit/10;
-        for_emp:=incentives*70/100;
+        for_emp:=incentives*0.7;
         for_dept:=incentives*30/100;
         select count(*) into no_of_emp from emp where deptno=rec.dno and prj_id=rec.prj_no;
         update emp set sal=sal+for_emp/no_of_emp where deptno=rec.dno and prj_id=rec.prj_no;
-        update deptt set dept_budget=dept_budget+for_dept where dno=rec.dno;
+        update dept set dept_budget=dept_budget+for_dept where dno=rec.dno;
     end loop;
 END;
 /

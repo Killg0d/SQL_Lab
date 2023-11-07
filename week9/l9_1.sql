@@ -1,3 +1,11 @@
+-- Write a PL/SQL program to demonstrate predefined exceptionsINVALID_NUMBER, TOO_MANY_ROWS, NO-DATA_FOUND. Do following
+-- operations in the PL/SQL block and handle pre-defined exceptions correspondingly by
+-- displaying proper messages.
+-- - Convert ename into number using to_number( ) function
+-- - Display ename of employee corresponding to user entered empno. Handle
+-- exception if entered empno does not exists.
+-- - Display ename of employee corresponding to user entered deptno. Handle
+-- exception.
 set serveroutput on;
 set verify off;
 
