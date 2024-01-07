@@ -1,0 +1,429 @@
+//Convertion of 2D matrix to row-major form
+//230970005
+//Tarun
+//05-01-2024
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+        int row,col,a[5][5];
+
+        cout<<"Enter the order of matrix(row,col):";
+        cin>>row>>col;
+        if(row!=col)
+        {
+                cout<<"\nCode only works for square matrix:";
+                exit(1);
+        }
+        cout<<"\nEnter the elements of matrix:";
+        for(int i=0;i<row;i++)
+        {
+                for(int j=0;j<col;j++)
+                {
+                        cin>>a[i][j];
+                }
+        }
+
+        cout<<"Contents of the 2D Matrix:\n";
+        for(int i=0;i<row;i++)
+        {
+                for(int j=0;j<col;j++)
+                {
+                        cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+        }
+
+        cout<<"\nMapping logic being executed for 2d to 1d:";
+        int k=0,r[row*col];//Initializing to square of order
+        for(int i=0;i<row;i++)
+        {
+                for(int j=0;j<col;j++)
+                {
+                        r[k++]=a[i][j];
+                }
+        }
+        cout<<"\n1 D array is:\n";
+        for(int i=0;i<row*col;i++)
+        {
+                cout<<r[i]<<"\t";
+        }
+        int m,n,offset;
+        cout<<"\nEnter index to verify(row,col):";
+        cin>>m>>n;
+        if(m>=row||n>=col)
+        {
+                cout<<"\nOrder out of Bounds\n";
+                exit(1);
+        }
+        cout<<"\n2D element is:"<<a[m][n];
+        offset=(m*row)+n;
+        cout<<"\n1D element is:"<<r[offset];
+
+        cout<<endl;
+        return 0;
+}
+
+//Convert 2D Matrix to column order Representation
+//230970005
+//Tarun
+//05-01-2024
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+        int row,col,a[5][5];
+
+        cout<<"Enter the order of matrix(row,col):";
+        cin>>row>>col;
+        if(row!=col)
+        {
+                cout<<"\nCode only works for square matrix:";
+                exit(1);
+        }
+        cout<<"\nEnter the elements of matrix:";
+        for(int i=0;i<row;i++)
+        {
+                for(int j=0;j<col;j++)
+                {
+                        cin>>a[i][j];
+                }
+        }
+
+        cout<<"Contents of the 2D Matrix:\n";
+		
+        for(int i=0;i<row;i++)
+        {
+                for(int j=0;j<col;j++)
+                {
+                        cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+        }
+
+        cout<<"\nMapping logic being executed for 2d to 1d:";
+        int k=0,r[row*col];//Initializing to square of order
+        for(int i=0;i<col;i++)
+        {
+                for(int j=0;j<row;j++)
+                {
+                        r[k++]=a[j][i];
+                }
+        }
+        cout<<"\n1 D array is:\n";
+        for(int i=0;i<row*col;i++)
+        {
+                cout<<r[i]<<"\t";
+        }
+        int m,n,offset;
+        cout<<"\nEnter index to verify(row,col):";
+        cin>>m>>n;
+        if(m>=row||n>=col)
+        {
+                cout<<"\nOrder out of Bounds\n";
+                exit(1);
+        }
+        cout<<"\n2D element is:"<<a[m][n];
+        offset=(n*col)+m;
+        cout<<"\n1D element is:"<<r[offset];
+
+        cout<<endl;
+        return 0;
+}
+
+				
+// Conversion of 2D Diagonal matrix to list
+//230970005
+//Tarun
+//05-01-2024
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+        int order,a[5][5];
+
+        cout<<"Enter the order of matrix:";
+        cin>>order;
+
+        cout<<"\nEnter the elements of 2D matrix:";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(i==j)
+                        {
+                                cin>>a[i][j];
+                        }
+                        else
+                        {
+                                a[i][j]=0;
+                        }
+                }
+        }
+
+        cout<<"Contents of the 2D Matrix:\n";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+        }
+
+        cout<<"\nMapping logic being executed for 2d to 1d:";
+        int k=0,r[order];//Initializing to square of order
+        for(int i=0;i<order;i++)
+        {
+                r[k++]=a[i][i];
+        }
+        cout<<"\n1 D array is:\n";
+        for(int i=0;i<order;i++)
+        {
+                cout<<r[i]<<"\t";
+        }
+        int m;
+        cout<<"\nEnter index to verify diagonal:";
+        cin>>m;
+        if(m>=order)
+        {
+                cout<<"\nOrder out of Bounds\n";
+                exit(1);
+        }
+        cout<<"\n2D element is:"<<a[m][m];
+        cout<<"\n1D element is:"<<r[m];
+
+        cout<<endl;
+        return 0;
+}
+
+//Conversion of Tridiagonal to list
+//230970005
+//Tarun
+//05-01-2024
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+        int order,a[5][5];
+
+        cout<<"Enter the order of matrix:";
+        cin>>order;
+
+        cout<<"\nEnter the "<<(3*order)-2<<" elements of Tridiagonal matrix:";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(abs(i-j)>1)
+                        {
+                                a[i][j]=0;
+                        }
+                        else
+                        {
+                                cin>>a[i][j];
+                        }
+                }
+        }
+
+        cout<<"Contents of the 2D Matrix:\n";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+        }
+
+        cout<<"\nMapping logic being executed for 2d to 1d:";
+        int k=0,r[3*order-2];//Initializing to square of order
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(abs(i-j)<=1)
+                        {
+                                r[k++]=a[i][j];
+                        }
+                }
+        }
+        cout<<"\n1 D array is:\n";
+        for(int i=0;i<((3*order)-2);i++)
+        {
+                cout<<r[i]<<"\t";
+        }
+        int m,n;
+        cout<<"\nEnter index to verify tridiagonal(row,col):";
+        cin>>m>>n;
+        if(abs(m-n)>1)
+        {
+                cout<<"\nOrder out of Bounds\n";
+                exit(1);
+        }
+        cout<<"\n2D element is:"<<a[m][n];
+        cout<<"\n1D element is:"<<r[2*m+n];
+        cout<<endl;
+        return 0;
+}
+
+//Conversion of uppertri matrix to list
+//230970005
+//Tarun
+//05-01-2024
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+        int order,a[5][5];
+
+        cout<<"Enter the order of matrix:";
+        cin>>order;
+
+        cout<<"\nEnter the "<<order*(order+1)/2<<" elements of upper Triangular matrix:";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(i>j)
+                        {
+                                a[i][j]=0;
+                        }
+                        else
+                        {
+                                cin>>a[i][j];
+                        }
+                }
+        }
+
+        cout<<"Contents of the 2D Matrix:\n";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+        }
+
+        cout<<"\nMapping logic being executed for 2d to 1d:";
+        int k=0,r[order*(order+1)/2];//Initializing to square of order
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(i<=j)
+                        {
+                                r[k++]=a[i][j];
+                        }
+                }
+        }
+        cout<<"\n1 D array is:\n";
+        for(int i=0;i<(order*(order+1)/2);i++)
+        {
+                cout<<r[i]<<"\t";
+        }
+        int m,n;
+        cout<<"\nEnter index to verify upper triangular matrix (row,col):";
+        cin>>m>>n;
+        if(m>n||m>order||n>order)
+        {
+                cout<<"\nOrder out of Bounds\n";
+                exit(1);
+        }
+        cout<<"\n2D element is:"<<a[m][n];
+        int offset=((order*m)+n-(m*(m+1)/2));
+
+        cout<<"\n1D element is:"<<r[offset];
+
+        cout<<endl;
+        return 0;
+}
+
+//Conversion of Lower triangular matrix to list
+//230970005
+//Tarun
+//05-01-2024
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+        int order,a[5][5];
+
+        cout<<"Enter the order of matrix:";
+        cin>>order;
+
+        cout<<"\nEnter the "<<order*(order+1)/2<<" elements of lower Triangular matrix:";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(i<j)
+                        {
+                                a[i][j]=0;
+                        }
+                        else
+                        {
+                                cin>>a[i][j];
+                        }
+                }
+        }
+
+        cout<<"Contents of the 2D Matrix:\n";
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        cout<<a[i][j]<<"\t";
+                }
+                cout<<endl;
+        }
+
+        cout<<"\nMapping logic being executed for 2d to 1d:";
+        int k=0,r[order*(order+1)/2];//Initializing to square of order
+        for(int i=0;i<order;i++)
+        {
+                for(int j=0;j<order;j++)
+                {
+                        if(i>=j)
+                        {
+                                r[k++]=a[i][j];
+                        }
+                }
+        }
+        cout<<"\n1 D array is:\n";
+        for(int i=0;i<(order*(order+1)/2);i++)
+        {
+                cout<<r[i]<<"\t";
+        }
+        int m,n;
+        cout<<"\nEnter index to verify upper triangular matrix (row,col):";
+        cin>>m>>n;
+        if(m<n||m>order||n>order)
+        {
+                cout<<"\nOrder out of Bounds\n";
+                exit(1);
+        }
+        cout<<"\n2D element is:"<<a[m][n];
+        int offset=(m*(m+1)/2+n);
+
+        cout<<"\n1D element is:"<<r[offset];
+
+        cout<<endl;
+        return 0;
+}
